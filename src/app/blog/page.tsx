@@ -32,7 +32,7 @@ export default async function BlogPage() {
             {post.metadata.external ? (
               <a
                 className="flex space-x-4 mb-4 group"
-                href={post.slug}
+                href={post.metadata.externalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >

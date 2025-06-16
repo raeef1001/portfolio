@@ -17,6 +17,7 @@ type Metadata = {
   summary: string;
   image?: string;
   external?: boolean;
+  externalUrl?: string; // Add this
 };
 
 const MEDIUM_RSS_URL = "https://medium.com/feed/@mohammadrafy1001";
@@ -70,8 +71,9 @@ async function getMediumPosts() {
         summary: item.contentSnippet || "No summary available.",
         image: imageUrl,
         external: true,
+        externalUrl: item.link || "#", // Store the full URL here
       },
-      slug: item.link || "#",
+      slug: item.title ? item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-*|-*$/g, '') : "no-title", // Create a simple slug from title
       source: "",
     };
   });
@@ -104,10 +106,17 @@ export async function markdownToHTML(markdown: string) {
 }
 
 export async function getPost(slug: string) {
-  const filePath = path.join(process.cwd(), "src", "content", `${slug}.mdx`);
+const filePath = path.resolve(process.cwd(), "src", "content", `${slug}.mdx`);
   let source = fs.readFileSync(filePath, "utf-8");
   const { content: rawContent, data } = matter(source);
-  const metadata = data as Metadata; // Explicitly cast data to Metadata type
+  const metadata = {
+    title: (data.title as string) || "No Title",
+    publishedAt: (data.publishedAt as string) || new Date().toISOString(),
+    summary: (data.summary as string) || "No summary available.",
+    image: data.image as string | undefined,
+    external: data.external as boolean | undefined,
+    externalUrl: data.externalUrl as string | undefined,
+  } as Metadata;
   const content = await markdownToHTML(rawContent);
 
   // Extract the first image from the content if metadata.image is not present
@@ -116,6 +125,8 @@ export async function getPost(slug: string) {
     const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
     if (imgMatch && imgMatch[1]) {
       imageUrl = imgMatch[1];
+    } else {
+      imageUrl = "/me.png"; // Fallback for local posts if no image found
     }
   }
 
@@ -145,7 +156,7 @@ async function getAllPosts(dir: string) {
 }
 
 export async function getBlogPosts() {
-  const localPosts = await getAllPosts(path.join(process.cwd(), "src", "content"));
+const localPosts = await getAllPosts(path.resolve(process.cwd(), "src", "content"));
   const mediumPosts = await getMediumPosts();
   return [...localPosts, ...mediumPosts];
 }

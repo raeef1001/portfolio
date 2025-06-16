@@ -196,7 +196,7 @@ export default async function Page() {
                   {post.metadata.external ? (
                     <a
                       className="flex flex-col space-y-1 mb-4 group"
-                      href={post.slug}
+                      href={post.metadata.externalUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
