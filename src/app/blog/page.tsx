@@ -28,17 +28,49 @@ export default async function BlogPage() {
         })
         .map((post, id) => (
           <BlurFade delay={BLUR_FADE_DELAY * 2 + id * 0.05} key={post.slug}>
-            <Link
-              className="flex flex-col space-y-1 mb-4"
-              href={`/blog/${post.slug}`}
-            >
-              <div className="w-full flex flex-col">
-                <p className="tracking-tight">{post.metadata.title}</p>
-                <p className="h-6 text-xs text-muted-foreground">
-                  {post.metadata.publishedAt}
-                </p>
-              </div>
-            </Link>
+            {post.metadata.external ? (
+              <a
+                className="flex space-x-4 mb-4 group"
+                href={post.slug}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="flex-1 flex flex-col">
+                  <p className="tracking-tight">{post.metadata.title}</p>
+                  <p className="h-6 text-xs text-muted-foreground">
+                    {post.metadata.publishedAt} (Medium)
+                  </p>
+                </div>
+                {post.metadata.image && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={post.metadata.image}
+                    alt={post.metadata.title}
+                    className="w-[150px] h-[100px] object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 ease-in-out"
+                  />
+                )}
+              </a>
+            ) : (
+              <Link
+                className="flex space-x-4 mb-4 group"
+                href={`/blog/${post.slug}`}
+              >
+                <div className="flex-1 flex flex-col">
+                  <p className="tracking-tight">{post.metadata.title}</p>
+                  <p className="h-6 text-xs text-muted-foreground">
+                    {post.metadata.publishedAt}
+                  </p>
+                </div>
+                {post.metadata.image && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={post.metadata.image}
+                    alt={post.metadata.title}
+                    className="w-[150px] h-[100px] object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 ease-in-out"
+                  />
+                )}
+              </Link>
+            )}
           </BlurFade>
         ))}
     </section>

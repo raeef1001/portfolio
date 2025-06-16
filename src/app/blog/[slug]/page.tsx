@@ -7,7 +7,7 @@ import { Suspense } from "react";
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
-  return posts.map((post) => ({ slug: post.slug }));
+  return posts.filter((post) => !post.metadata.external).map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({
@@ -91,6 +91,14 @@ export default async function Blog({
       <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
         {post.metadata.title}
       </h1>
+      {post.metadata.image && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={post.metadata.image}
+          alt={post.metadata.title}
+          className="float-right ml-8 mb-4 w-1/3 max-w-[200px] h-auto rounded-lg object-cover"
+        />
+      )}
       <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]">
         <Suspense fallback={<p className="h-5" />}>
           <p className="text-sm text-neutral-600 dark:text-neutral-400">

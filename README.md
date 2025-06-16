@@ -1,47 +1,37 @@
-<div align="center">
-<img alt="Portfolio" src="https://github.com/dillionverma/portfolio/assets/16860528/57ffca81-3f0a-4425-b31d-094f61725455" width="90%">
-</div>
+# My Portfolio
 
-# Portfolio [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdillionverma%2Fportfolio)
+Welcome to my personal portfolio! This repository showcases my work, skills, and experience as a software engineer.
 
-Built with next.js, [shadcn/ui](https://ui.shadcn.com/), and [magic ui](https://magicui.design/), deployed on Vercel.
+## About Me
 
-# Features
+I am a passionate software engineer with expertise in various technologies and a strong focus on building scalable and efficient applications. I enjoy solving complex problems and continuously learning new tools and frameworks.
 
-- Setup only takes a few minutes by editing the [single config file](./src/data/resume.tsx)
-- Built using Next.js 14, React, Typescript, Shadcn/UI, TailwindCSS, Framer Motion, Magic UI
-- Includes a blog
-- Responsive for different devices
-- Optimized for Next.js and Vercel
+For more details, please visit my [portfolio website](https://jobayerrahman.com).
 
-# Getting Started Locally
+## Projects
 
-1. Clone this repository to your local machine:
+Here are some of the projects I've worked on:
 
-   ```bash
-   git clone https://github.com/dillionverma/portfolio
-   ```
+- **Project 1**: [Link to Project 1] - A brief description of Project 1.
+- **Project 2**: [Link to Project 2] - A brief description of Project 2.
+- **Project 3**: [Link to Project 3] - A brief description of Project 3.
 
-2. Move to the cloned directory
+(For more details, please visit the projects section of my portfolio website.)
 
-   ```bash
-   cd portfolio
-   ```
+## Skills
 
-3. Install dependencies:
+- **Programming Languages**: JavaScript, TypeScript, Python, Java, C++
+- **Frontend**: React, Next.js, HTML, CSS, Tailwind CSS, Shadcn/UI
+- **Backend**: Node.js, Express.js, Django, Flask
+- **Databases**: PostgreSQL, MongoDB, MySQL
+- **Tools & Technologies**: Git, Docker, AWS, Vercel, CI/CD
 
-   ```bash
-   pnpm install
-   ```
+## Contact
 
-4. Start the local Server:
+Feel free to reach out to me through:
 
-   ```bash
-   pnpm dev
-   ```
+- **Email**: jobayerrahman@iut-dhaka.edu
+- **LinkedIn**: [My LinkedIn Profile](https://linkedin.com/in/rafy1001)
+- **GitHub**: [My GitHub Profile](https://github.com/raeef1001)
 
-5. Open the [Config file](./src/data/resume.tsx) and make changes
-
-# License
-
-Licensed under the [MIT license](https://github.com/dillionverma/portfolio/blob/main/LICENSE.md).
+Thank you for visiting my portfolio!
