@@ -9,6 +9,8 @@ import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 import Parser from "rss-parser";
 
+let cachedMediumPosts: any[] | null = null; // Cache variable
+
 type Metadata = {
   title: string;
   publishedAt: string;
@@ -20,11 +22,16 @@ type Metadata = {
 const MEDIUM_RSS_URL = "https://medium.com/feed/@mohammadrafy1001";
 
 async function getMediumPosts() {
+  if (cachedMediumPosts) {
+    console.log("Returning cached Medium posts.");
+    return cachedMediumPosts;
+  }
+
   const parser = new Parser();
   const feed = await parser.parseURL(MEDIUM_RSS_URL);
   console.log(`Fetched ${feed.items.length} items from Medium RSS feed.`);
 
-  return feed.items.map((item) => {
+  const posts = feed.items.map((item) => {
     let imageUrl = undefined;
 
     // 1. Prioritize item.thumbnail
@@ -68,6 +75,9 @@ async function getMediumPosts() {
       source: "",
     };
   });
+
+  cachedMediumPosts = posts; // Cache the fetched posts
+  return posts;
 }
 
 function getMDXFiles(dir: string) {
