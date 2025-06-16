@@ -94,7 +94,7 @@ export async function markdownToHTML(markdown: string) {
 }
 
 export async function getPost(slug: string) {
-  const filePath = path.join(process.cwd(), "content", `${slug}.mdx`);
+  const filePath = path.join(process.cwd(), "src", "content", `${slug}.mdx`);
   let source = fs.readFileSync(filePath, "utf-8");
   const { content: rawContent, data } = matter(source);
   const metadata = data as Metadata; // Explicitly cast data to Metadata type
@@ -135,7 +135,7 @@ async function getAllPosts(dir: string) {
 }
 
 export async function getBlogPosts() {
-  const localPosts = await getAllPosts(path.join(process.cwd(), "content"));
+  const localPosts = await getAllPosts(path.join(process.cwd(), "src", "content"));
   const mediumPosts = await getMediumPosts();
   return [...localPosts, ...mediumPosts];
 }
